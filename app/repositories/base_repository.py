@@ -1,29 +1,24 @@
 import abc
+from datetime import date
 from typing import TypeVar
 
+from app.schemas import SpimexTradeFiltres
 from models import Base, SpimexTrade
 
 T = TypeVar("T", bound=Base)
 
 
-class Repository(abc.ABC):
+class BaseRepository(abc.ABC):
     """Интерфейс для репозитория"""
-
+    
     @abc.abstractmethod
-    def add(self, entity: list[SpimexTrade]):
+    def get_last_trading_dates(self, limit: int) -> list[date]:
         raise NotImplementedError
     
-
     @abc.abstractmethod
-    def update(self, id_: id):
+    def get_dynamics(self, start_date: date, end_date: date, filtres: SpimexTradeFiltres) -> list[SpimexTrade]:
         raise NotImplementedError
     
-
     @abc.abstractmethod
-    def remove(self, id_: id):
-        raise NotImplementedError
-    
-
-    @abc.abstractmethod
-    def get_by_id(self, id_: id):
+    def get_trading_results(self, filtres: SpimexTradeFiltres) -> list[SpimexTrade]:
         raise NotImplementedError

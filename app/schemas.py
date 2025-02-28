@@ -15,3 +15,9 @@ class SpimaxTrade(BaseModel):
     total: float
     count: int
     date: date
+
+
+class SpimexTradeFiltres(BaseModel):
+    oil_id: str | None
+    delivery_type_id: str | None
+    delivery_basis_id: str | None
