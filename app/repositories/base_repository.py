@@ -3,7 +3,7 @@ from datetime import date
 from typing import TypeVar
 
 from app.schemas import SpimexTradeFiltres
-from models import Base, SpimexTrade
+from app.models import Base, SpimexTrade
 
 T = TypeVar("T", bound=Base)
 
