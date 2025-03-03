@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from datetime import date
 
 
-class SpimexTrade(BaseModel):
+class SpimexTradeResponse(BaseModel):
 
     exchange_product_id: str
     exchange_product_name: str
@@ -16,6 +16,8 @@ class SpimexTrade(BaseModel):
     count: int
     date: date
 
+    class Config:
+        from_attributes = True
 
 class SpimexTradeFiltres(BaseModel):
     oil_id: str | None = None
