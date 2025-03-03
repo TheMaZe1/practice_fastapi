@@ -55,7 +55,7 @@ class SQLAlchemyRepositoryAsync(BaseRepository):
         trades = await self.db.execute(query)
         return [SpimexTradeResponse.model_validate(trade) for trade in trades.scalars().all()]
     
-    async def get_trading_results(self, filtres: SpimexTradeFiltres, limit: int = 100) -> list[SpimexTradeResponse]:
+    async def get_trading_results(self, filtres: SpimexTradeFiltres, limit: int) -> list[SpimexTradeResponse]:
         """Получает список последних торгов.
 
         Args:
