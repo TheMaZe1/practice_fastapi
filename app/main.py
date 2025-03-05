@@ -6,13 +6,14 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 
 from app.cache import cache_time
+from app.config import REDIS
 from app.database import init_models
 from app.routers import router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    redis_client = await redis.from_url("redis://localhost:6379")
+    redis_client = await redis.from_url(f"redis://{REDIS}")
     FastAPICache.init(RedisBackend(redis_client), prefix='fastapi-cache')
     cache_task = asyncio.create_task(cache_time(redis_client))
     yield  # Здесь работает приложение
