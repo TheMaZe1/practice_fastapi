@@ -24,8 +24,7 @@ class SQLAlchemyRepositoryAsync(BaseRepository):
         """
         query = select(SpimexTrade.date).group_by(SpimexTrade.date)\
                     .order_by(desc(SpimexTrade.date))\
-                    .limit(limit)
-                                 
+                    .limit(limit)                     
         dates = await self.db.execute(query)
         return dates.scalars().all()
     
@@ -51,7 +50,6 @@ class SQLAlchemyRepositoryAsync(BaseRepository):
         if filtres.delivery_type_id:
             query = query.filter(SpimexTrade.delivery_type_id == filtres.delivery_type_id)
         
-
         trades = await self.db.execute(query)
         return [SpimexTradeResponse.model_validate(trade) for trade in trades.scalars().all()]
     
@@ -74,6 +72,5 @@ class SQLAlchemyRepositoryAsync(BaseRepository):
         if filtres.delivery_type_id:
             query = query.filter(SpimexTrade.delivery_type_id == filtres.delivery_type_id)
         
-
         trades = await self.db.execute(query.limit(limit))
         return [SpimexTradeResponse.model_validate(trade) for trade in trades.scalars().all()]

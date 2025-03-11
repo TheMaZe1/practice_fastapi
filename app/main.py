@@ -7,7 +7,6 @@ from fastapi_cache.backends.redis import RedisBackend
 
 from app.cache import cache_time
 from app.config import REDIS
-from app.database import init_models
 from app.routers import router
 
 
@@ -18,7 +17,7 @@ async def lifespan(app: FastAPI):
     cache_task = asyncio.create_task(cache_time(redis_client))
     yield  # Здесь работает приложение
     cache_task.cancel()
-    await redis_client.close()
+    await redis_client.aclose()
 
 
 app = FastAPI(lifespan=lifespan)

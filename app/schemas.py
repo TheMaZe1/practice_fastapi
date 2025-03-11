@@ -19,6 +19,9 @@ class SpimexTradeResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class SpimexTradeResponseList(BaseModel):
+    trades: list[SpimexTradeResponse]
+
 class SpimexTradeFiltres(BaseModel):
     oil_id: str | None = None
     delivery_type_id: str | None = None
