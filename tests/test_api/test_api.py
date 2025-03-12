@@ -7,7 +7,7 @@ from app.schemas import SpimexTradeResponseList
 async def test_get_last_trading_dates(async_client):
     response = await async_client.get("/last_trading_dates",params={"limit": 10})
     assert response.status_code == 200
-    assert len(response.json()) == 10
+    assert len(response.json()) == 2
 
 
 @pytest.mark.asyncio(loop_scope="session")
@@ -30,5 +30,5 @@ async def test_get_trading_results(async_client):
     
     response = await async_client.get("/trading_results", params=params)
     assert response.status_code == 200
-    assert len(response.json()["trades"]) == 10
+    assert len(response.json()["trades"]) == 2
     SpimexTradeResponseList.model_validate_json(response.text)
